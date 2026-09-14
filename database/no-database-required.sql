@@ -1,0 +1,5 @@
+-- LokalCart POS Technical Formative Assessment 1
+-- No database schema or records are required for this milestone.
+-- Customer and user records are temporary PHP arrays in their controllers.
+-- This file is included because the general submission checklist asks for a
+-- database export while the activity itself explicitly requires no database.
