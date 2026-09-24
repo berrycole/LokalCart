@@ -1,195 +1,123 @@
-# LokalCart POS
+# LokalCart POS TFA2
 
-LokalCart POS is a four-page CodeIgniter 4 application created for IT0049 Technical Formative Assessment 1. It demonstrates routing, controllers, views, reusable layouts, and temporary static-array data before a database is introduced.
+LokalCart POS TFA2 is a CodeIgniter 4 application for IT0049 Technical Formative Assessment 2. It extends TFA1 by replacing static customer and user arrays with a MySQL database and CodeIgniter Models.
 
-## Required pages
+## Completed requirements
 
-| Route | Controller method | Purpose |
+| Requirement | Implementation |
+| --- | --- |
+| Database connection | .env and .env.example define MySQLi settings for lokalcart_pos_tfa2. |
+| Schema and data | database/lokalcart_pos_tfa2.sql creates customers and users and adds six records to each. |
+| Models | CustomerModel and UserModel map to the required tables. |
+| Query usage | Controllers use their Models with orderBy()->findAll(). |
+| Views | The responsive account tables render retrieved records with esc(). |
+
+## Routes
+
+| Route | Controller | Database source |
 | --- | --- | --- |
-| `/` | `Pages::index` | Landing page and project summary |
-| `/about` | `Pages::about` | MVC and project-scope explanation |
-| `/customers` | `Customers::index` | Six customer records from a static PHP array |
-| `/users` | `Users::index` | Six staff records from a static PHP array |
+| / | Pages::index | None |
+| /about | Pages::about | None |
+| /customers | Customers::index | CustomerModel and customers |
+| /users | Users::index | UserModel and users |
 
-The customer and user views use `foreach` loops to render the arrays received from their controllers. No database is used in this milestone.
+## Local setup on Windows
 
-## Technology requirements
+### 1. Install PHP dependencies
 
-- PHP 8.2 or newer
-- PHP extensions: `intl` and `mbstring`
-- Composer 2.0.14 or newer
-- A modern browser
+Open PowerShell in the project folder:
 
-This project was built and tested with PHP 8.4.10, Composer 2.8.9, and CodeIgniter 4.7.4.
+~~~powershell
+C:\php\php.exe -d extension=intl -d extension=mysqli C:\Users\Ycole\composer\composer.phar install
+~~~
 
-## Run the project on this Windows computer
+Use the PHP executable installed on your computer if it is stored elsewhere. PHP 8.2+, intl, and mysqli are required.
 
-PHP and Composer are already present on this computer. PHP is located at `C:\php\php.exe`, Composer is located at `C:\Users\Ycole\composer\composer.phar`, and a second PHP installation is available through XAMPP at `D:\xampp\php\php.exe`.
+### 2. Start MySQL and import the export
 
-### 1. Enable the required PHP extensions
+Start MySQL in XAMPP or another local MySQL installation. In phpMyAdmin, open http://localhost/phpmyadmin, select Import, choose database/lokalcart_pos_tfa2.sql, and click Import.
 
-The `intl` file exists but is not currently enabled in the command-line PHP configuration. Enable it once so normal Composer and Spark commands work without extra flags:
+The export creates the lokalcart_pos_tfa2 database, both required tables, and six sample records in each table. Import it into a fresh local database; repeating the import adds duplicate customer rows.
 
-1. Open File Explorer and go to `C:\php`.
-2. Right-click `php.ini`, choose **Open with**, and select Notepad. If Windows refuses to save, reopen Notepad with **Run as administrator**, then open `C:\php\php.ini` from Notepad.
-3. Press `Ctrl+F`, search for `;extension=intl`, and remove the leading semicolon so the line reads `extension=intl`.
-4. Search for `;extension=zip` and remove its leading semicolon so the line reads `extension=zip`. Zip is not required by the running website, but Composer uses it to install packages reliably.
-5. Confirm `extension=mbstring` is also enabled without a leading semicolon.
-6. Save `php.ini`, close all open command prompts or PowerShell windows, and open a new PowerShell window.
-7. Verify the extensions:
+### 3. Confirm .env settings
 
-   ```powershell
-   C:\php\php.exe -m | Select-String 'intl|mbstring|zip'
-   ```
+This project contains a ready-to-edit .env file. After cloning from GitHub, create it with:
 
-   The output should list `intl`, `mbstring`, and `zip`.
-
-If you prefer not to edit `php.ini`, prefix PHP commands with temporary extension options:
-
-```powershell
-C:\php\php.exe -d extension=intl -d extension=zip C:\Users\Ycole\composer\composer.phar install
-C:\php\php.exe -d extension=intl spark serve
-```
-
-### 2. Open the project directory
-
-In PowerShell, run:
-
-```powershell
-cd "PATH\TO\lokalcart-pos"
-```
-
-Replace `PATH\TO\lokalcart-pos` with the actual extracted or cloned project location.
-
-### 3. Install project dependencies
-
-The `vendor` directory is intentionally excluded from Git repositories. After cloning the project, run:
-
-```powershell
-C:\php\php.exe C:\Users\Ycole\composer\composer.phar install
-```
-
-Wait until Composer reports that it generated the autoload files. If Composer reports that `ext-intl` is missing, return to step 1.
-
-### 4. Create the local environment file
-
-If `.env` is not present after cloning, copy the safe template:
-
-```powershell
+~~~powershell
 Copy-Item .env.example .env
-```
+~~~
 
-Open `.env` and confirm:
+The default settings assume a normal local XAMPP/MySQL installation:
 
-```ini
-CI_ENVIRONMENT = development
-app.baseURL = 'http://localhost:8080/'
-app.indexPage = ''
-```
+~~~ini
+database.default.hostname = localhost
+database.default.database = lokalcart_pos_tfa2
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+~~~
 
-### 5. Start the development server
+Change the username, password, or port only when your MySQL setup uses different credentials. Never commit .env.
 
-Run:
+### 4. Run and verify
 
-```powershell
-C:\php\php.exe spark serve
-```
+~~~powershell
+C:\php\php.exe -d extension=intl -d extension=mysqli spark serve
+~~~
 
-Keep the PowerShell window open. When the terminal says the server started, open `http://localhost:8080/` in a browser.
+Open:
 
-### 6. Verify all routes
+- http://localhost:8080/
+- http://localhost:8080/about
+- http://localhost:8080/customers
+- http://localhost:8080/users
 
-Open each address and confirm the navigation and page content load:
+Customers should display six records; Users should display six records and their creation dates. Stop the server with Ctrl+C.
 
-- `http://localhost:8080/`
-- `http://localhost:8080/about`
-- `http://localhost:8080/customers`
-- `http://localhost:8080/users`
+## Tests
 
-Press `Ctrl+C` in the server terminal when you want to stop it.
+~~~powershell
+C:\php\php.exe -d extension=intl -d extension=mysqli vendor\bin\phpunit
+~~~
 
-## Automated checks
-
-Run the full test suite from the project root:
-
-```powershell
-C:\php\php.exe vendor\bin\phpunit
-```
-
-The feature tests check that all four required pages return HTTP 200 and that both listing pages render the sample array records.
-
-Inspect registered routes with:
-
-```powershell
-C:\php\php.exe spark routes
-```
+The automated checks verify the non-database routes and Model classes. Verify the database-backed pages after importing the SQL export because they intentionally connect to local MySQL.
 
 ## Project structure
 
-```text
-app/
-  Config/Routes.php             Four explicit GET routes
-  Controllers/Pages.php         Landing and about page logic
-  Controllers/Customers.php     Six-record customer array
-  Controllers/Users.php         Six-record staff array
-  Views/layouts/main.php        Shared header, navigation, and footer
-  Views/pages/                  Landing and about views
-  Views/customers/index.php     Customer foreach table
-  Views/users/index.php         User foreach table
-public/
-  assets/css/app.css            Shared responsive design system
-tests/feature/PagesTest.php     Route and content checks
-database/
-  no-database-required.sql      Submission note for this no-database activity
-```
+~~~text
+app/Controllers/Customers.php    Reads customers through CustomerModel
+app/Controllers/Users.php        Reads users through UserModel
+app/Models/CustomerModel.php     Customer table model
+app/Models/UserModel.php         User table model
+database/lokalcart_pos_tfa2.sql  MySQL schema and sample records
+~~~
 
-## GitHub submission steps
+## GitHub and hosting submission
 
-1. Sign in to GitHub and select **New repository**.
-2. Name it `lokalcart-pos` and choose **Public** unless the instructor requires a private repository.
-3. Do not add a README, `.gitignore`, or license on GitHub because the project already contains them.
-4. Select **Create repository**.
-5. In PowerShell, from the project root, run the following commands. Replace `YOUR-USERNAME` with your GitHub username:
+1. Create a new public repository, for example LokalCart-TFA2.
+2. From this project, point Git to the new repository and push:
 
-   ```powershell
-   git init
-   git add .
-   git commit -m "Complete CodeIgniter POS foundation"
-   git branch -M main
-   git remote add origin https://github.com/YOUR-USERNAME/lokalcart-pos.git
-   git push -u origin main
-   ```
+~~~powershell
+git remote set-url origin https://github.com/YOUR-USERNAME/LokalCart-TFA2.git
+git add .
+git commit -m "Complete LokalCart POS TFA2 database integration"
+git branch -M main
+git push -u origin main
+~~~
 
-6. Refresh the GitHub repository page and confirm the `app`, `public`, `tests`, and `database` folders appear.
-7. Confirm that `.env` and `vendor` do not appear. Their omission is intentional for security and repository size; `.env.example`, `composer.json`, and `composer.lock` allow the project to be rebuilt.
-8. Copy the repository URL for the submission form.
-
-## Hosting checklist
-
-The hosting provider must support PHP 8.2+, Composer dependencies, and a document root that can point to the `public` directory.
-
-1. Push the final project to GitHub.
-2. Create a new PHP web service with your hosting provider and connect the GitHub repository.
-3. Set the build command to `composer install --no-dev --optimize-autoloader`.
-4. Set the web or document root to the project's `public` directory. Do not expose the project root.
-5. Add an environment variable named `CI_ENVIRONMENT` with the value `production`.
-6. Set `app.baseURL` to the complete HTTPS site address, including the trailing slash, such as `https://example-host.app/`.
-7. Ensure the server process can write to the `writable` directory.
-8. Deploy, then open all four routes and compare them with the local version.
-9. Copy the live HTTPS URL for the submission form.
-
-Hosting dashboards differ, so use the provider's PHP deployment guide for the exact button names. Never upload the development `.env` file or expose `vendor`, `app`, or `writable` as the public web root.
+3. Confirm GitHub includes app, database/lokalcart_pos_tfa2.sql, public, tests, .env.example, and README.md, but not .env or vendor.
+4. Deploy with a host that supports PHP and MySQL, points its web root to public, and stores database credentials securely.
+5. Submit the GitHub repository link and deployed HTTPS link required by the assignment.
 
 ## Rubric alignment
 
-- **Functionality and completeness:** all four required routes, shared navigation, and both listing pages are implemented.
-- **Code structure and organization:** routes, controllers, views, layout, CSS, and tests have separate responsibilities and consistent names.
-- **Static-array data handling:** each listing controller defines six associative records; each view uses `foreach` and escapes output with `esc()`.
-- **Documentation and submission quality:** this README includes local setup, verification, repository submission, and production-hosting instructions.
+- Functionality: the four original routes remain available with database-backed account listings.
+- Code structure: controllers, models, views, SQL export, and tests are kept separate.
+- Database design: the export matches the required schema and controllers use CodeIgniter Models instead of raw SQL.
+- Documentation: this README covers import, configuration, verification, GitHub, and hosting.
 
 ## References
 
-- [CodeIgniter installation guide](https://codeigniter.com/user_guide/installation/)
-- [CodeIgniter routing guide](https://codeigniter.com/user_guide/incoming/routing.html)
-- [CodeIgniter controllers guide](https://codeigniter.com/user_guide/incoming/controllers.html)
-- [CodeIgniter views guide](https://codeigniter.com/user_guide/outgoing/views.html)
+- [CodeIgniter Models](https://codeigniter.com/user_guide/models/model.html)
+- [CodeIgniter Query Builder](https://codeigniter.com/user_guide/database/query_builder.html)

@@ -18,7 +18,7 @@
                 <div><dt>4</dt><dd>Working pages</dd></div>
                 <div><dt>12</dt><dd>Sample accounts</dd></div>
                 <div><dt>MVC</dt><dd>Organized structure</dd></div>
-                <div><dt>0</dt><dd>Database tables</dd></div>
+                <div><dt>2</dt><dd>Database tables</dd></div>
             </dl>
         </div>
     </div>
@@ -26,14 +26,14 @@
 <section class="section">
     <div class="container">
         <div class="section-heading">
-            <p class="eyebrow">Explore the foundation</p>
-            <h2>Everything required for the first POS milestone.</h2>
-            <p>Each page has a focused purpose while sharing one consistent navigation and visual system.</p>
+            <p class="eyebrow">Explore the application</p>
+            <h2>From a clear MVC foundation to a real database.</h2>
+            <p>Each page has a focused purpose while customer and user records now persist in MySQL.</p>
         </div>
         <div class="card-grid">
-            <article class="feature-card"><span class="card-number">01</span><h3>About the project</h3><p>See how routes, controllers, and views work together before a database is introduced.</p><a class="text-link" href="<?= site_url('about') ?>">Read the overview <span aria-hidden="true">&rarr;</span></a></article>
-            <article class="feature-card"><span class="card-number">02</span><h3>Customer accounts</h3><p>Review customer names, email addresses, and phone numbers from a controller array.</p><a class="text-link" href="<?= site_url('customers') ?>">Open customers <span aria-hidden="true">&rarr;</span></a></article>
-            <article class="feature-card"><span class="card-number">03</span><h3>User accounts</h3><p>Review usernames, staff names, and assigned roles from a separate controller array.</p><a class="text-link" href="<?= site_url('users') ?>">Open user accounts <span aria-hidden="true">&rarr;</span></a></article>
+            <article class="feature-card"><span class="card-number">01</span><h3>About the project</h3><p>See how routes, controllers, models, and views work together in CodeIgniter.</p><a class="text-link" href="<?= site_url('about') ?>">Read the overview <span aria-hidden="true">&rarr;</span></a></article>
+            <article class="feature-card"><span class="card-number">02</span><h3>Customer accounts</h3><p>Review customer names, email addresses, and phone numbers retrieved from MySQL.</p><a class="text-link" href="<?= site_url('customers') ?>">Open customers <span aria-hidden="true">&rarr;</span></a></article>
+            <article class="feature-card"><span class="card-number">03</span><h3>User accounts</h3><p>Review usernames and full names retrieved through a separate database model.</p><a class="text-link" href="<?= site_url('users') ?>">Open user accounts <span aria-hidden="true">&rarr;</span></a></article>
         </div>
     </div>
 </section>

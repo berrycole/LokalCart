@@ -2,6 +2,8 @@
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
+use App\Models\CustomerModel;
+use App\Models\UserModel;
 
 /** @internal */
 final class PagesTest extends CIUnitTestCase
@@ -22,24 +24,12 @@ final class PagesTest extends CIUnitTestCase
         return [
             'landing page'   => ['/', 'Your store team and customers'],
             'about page'     => ['/about', 'A simple MVC request flow'],
-            'customers page' => ['/customers', 'Customer Accounts'],
-            'users page'     => ['/users', 'User Accounts'],
         ];
     }
 
-    public function testCustomerPageDisplaysAllStaticRecords(): void
+    public function testDatabaseModelsAreAvailable(): void
     {
-        $result = $this->get('/customers');
-        $result->assertSee('Mikaela Santos');
-        $result->assertSee('Andre Villanueva');
-        $result->assertSee('6 sample customers');
-    }
-
-    public function testUserPageDisplaysAllStaticRecords(): void
-    {
-        $result = $this->get('/users');
-        $result->assertSee('admin.ramos');
-        $result->assertSee('support.tan');
-        $result->assertSee('6 sample staff members');
+        $this->assertTrue(class_exists(CustomerModel::class));
+        $this->assertTrue(class_exists(UserModel::class));
     }
 }

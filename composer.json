@@ -1,6 +1,6 @@
 {
     "name": "student/lokalcart-pos",
-    "description": "A four-page CodeIgniter 4 POS foundation for IT0049 Technical Formative Assessment 1",
+    "description": "A database-backed CodeIgniter 4 POS application for IT0049 Technical Formative Assessment 2",
     "license": "MIT",
     "type": "project",
     "homepage": "https://codeigniter.com",

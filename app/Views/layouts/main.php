@@ -27,7 +27,7 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <div><strong>LokalCart POS</strong><p>A CodeIgniter 4 MVC foundation for IT0049.</p></div>
-            <p>Static demo data only. No database connection required.</p>
+            <p>Customer and user records are retrieved from the LokalCart MySQL database.</p>
         </div>
     </footer>
 </body>

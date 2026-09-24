@@ -1,44 +1,36 @@
-# IT0049 Technical Formative Assessment 1 Submission Checklist
+# IT0049 Technical Formative Assessment 2 Submission Checklist
 
 ## Student details
 
-- Student or group name: ______________________________
-- Members, if a group: ________________________________
-- Section: ____________________________________________
-- Professor: __________________________________________
+- Student name: Nicole Fernandez
+- Section: TW32
+- Professor: Von Erick Magbitang
 
-## Final verification
+## Database verification
 
-- [ ] `/` opens the LokalCart landing page.
-- [ ] `/about` explains the project and MVC request flow.
-- [ ] `/customers` displays at least five customer records with full name, email, and phone.
-- [ ] `/users` displays at least five staff records with username, full name, and role.
-- [ ] Every navigation link works on all four pages.
-- [ ] The layout remains readable on a phone-size browser window.
-- [ ] `php vendor/bin/phpunit` reports all tests passing.
-- [ ] `php spark routes` lists exactly the four required GET routes.
+- [ ] MySQL is running locally.
+- [ ] database/lokalcart_pos_tfa2.sql was imported successfully.
+- [ ] The lokalcart_pos_tfa2 database contains customers and users.
+- [ ] Each table has at least five records.
+- [ ] .env has the correct local MySQL username, password, and port.
 
-## Rubric evidence
+## Application verification
 
-- **Functionality and requirements, 40 points:** four working pages, complete fields, and consistent navigation.
-- **Code structure and organization, 25 points:** explicit routes, three focused controllers, reusable layout, separate views, and shared CSS.
-- **Static-array data handling, 20 points:** six associative records in each listing controller and a `foreach` loop in each listing view.
-- **Documentation and submission, 15 points:** complete README, lock file, environment example, automated tests, database-status note, repository link, and live link.
+- [ ] / and /about open without errors.
+- [ ] /customers displays full name, email, and phone from the database.
+- [ ] /users displays username, full name, and created at from the database.
+- [ ] Customer and user records are retrieved through Models, not static arrays.
+- [ ] Navigation works on all four pages.
+- [ ] php vendor/bin/phpunit passes.
+
+## Repository verification
+
+- [ ] database/lokalcart_pos_tfa2.sql is committed.
+- [ ] Both Models, controllers, views, .env.example, and README.md are present.
+- [ ] .env, vendor, and writable logs are not committed.
+- [ ] The latest Git commit matches the deployed code.
 
 ## Links to submit
 
-- GitHub repository: __________________________________
-- Hosted application: _________________________________
-
-## Repository check
-
-- [ ] The repository contains `app`, `public`, `tests`, and `database`.
-- [ ] `README.md`, `composer.json`, and `composer.lock` are visible.
-- [ ] `.env.example` is visible, but `.env` is not committed.
-- [ ] `vendor` is not committed.
-- [ ] The latest commit matches the hosted version.
-- [ ] The live site uses HTTPS and all four routes work.
-
-## Database submission note
-
-This activity explicitly requires static PHP arrays and states that no database is involved. The file `database/no-database-required.sql` documents that scope while satisfying the general submission checklist's request for a database-export item.
+- GitHub repository: ________________________________
+- Hosted application: _______________________________
