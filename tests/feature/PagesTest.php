@@ -2,7 +2,7 @@
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\FeatureTestTrait;
-use App\Models\CustomerModel;
+use App\Models\TaskModel;
 use App\Models\UserModel;
 
 /** @internal */
@@ -22,14 +22,16 @@ final class PagesTest extends CIUnitTestCase
     public static function pageProvider(): array
     {
         return [
-            'landing page'   => ['/', 'Your store team and customers'],
-            'about page'     => ['/about', 'A simple MVC request flow'],
+            'today dashboard' => ['/', 'Tasks for today'],
+            'task list' => ['/tasks', 'Task List'],
+            'profile page' => ['/profile', 'Profile'],
+            'about page' => ['/about', 'Built by Berry Cole'],
         ];
     }
 
-    public function testDatabaseModelsAreAvailable(): void
+    public function testRequiredModelsAreAvailable(): void
     {
-        $this->assertTrue(class_exists(CustomerModel::class));
+        $this->assertTrue(class_exists(TaskModel::class));
         $this->assertTrue(class_exists(UserModel::class));
     }
 }
