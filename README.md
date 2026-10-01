@@ -1,36 +1,46 @@
-# LokalCart Tasks for Today Management System
+# LokalCart POS
 
-A CodeIgniter 4 MVC application for the IT0049 Tasks for Today Management System activity. It provides a today-only dashboard, a complete task list, a demo profile, and a static About page.
-
-## Pages
-
-| Route | Purpose |
-| --- | --- |
-| `/` | Welcome page showing only tasks where `task_date` equals today |
-| `/tasks` | Full task listing ordered by task date |
-| `/profile` | The single demo user record |
-| `/about` | Static developer and application overview |
-
-## Database setup
-
-1. Start MySQL in XAMPP or another local MySQL installation.
-2. Import `database/lokalcart_pos_tfa2.sql` using phpMyAdmin or the MySQL client.
-3. Copy `.env.example` to `.env` and confirm the database settings point to `lokalcart_pos_tfa2`.
-4. Start the app with `php spark serve`, then open `http://localhost:8080/`.
-
-The SQL export creates the required `tasks` and `users` tables, inserts eight tasks across four dates including today, and inserts exactly one demo user. `TaskModel` and `UserModel` provide the shared data layer used by the pages.
-
-## Project structure
-
-```text
-app/Controllers/Pages.php       Today dashboard and About page
-app/Controllers/Tasks.php       Full task listing
-app/Controllers/Profile.php     Demo profile page
-app/Models/TaskModel.php        tasks table model
-app/Models/UserModel.php        users table model
-database/lokalcart_pos_tfa2.sql Schema and seed data
-```
+A CodeIgniter 4 application for IT0049 Technical Formative Assessment 3. It extends the TFA2 task dashboard with customer and user account forms, server-side validation, and prepared user avatars.
 
 ## Requirements
 
-PHP 8.2+, CodeIgniter 4, MySQL, the `intl` and `mysqli` PHP extensions, and Composer dependencies from `composer.json`.
+- PHP 8.2 or later with `intl`, `mysqli`, `fileinfo`, and `gd` extensions
+- MySQL or MariaDB
+- Composer
+- A writable `public/uploads/avatars` directory for the web server
+
+## Local setup
+
+1. Run `composer install` in this directory.
+2. Import `database/lokalcart_pos_tfa3.sql` into MySQL. This creates the `lokalcart_pos_tfa3` database, tables, and sample data. **It drops existing tables in that database**, so back up any data there first.
+3. Copy `.env.example` to `.env`. Set your database username, password, host, and port as needed. The default database name is `lokalcart_pos_tfa3`.
+4. Run `php spark serve` and visit `http://localhost:8080/`.
+
+For an existing TFA2 installation, run `database/upgrade_tfa2_to_tfa3.sql` once against `lokalcart_pos_tfa2` instead of importing the fresh export. Keep `.env` pointed at `lokalcart_pos_tfa2`. That script adds the customers table and avatar column without deleting tasks or users. Do not rerun the `ALTER TABLE` after it succeeds.
+
+## Pages and behavior
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Today's task dashboard |
+| `/tasks` | Full task list |
+| `/profile` | Original TFA2 demo profile |
+| `/about` | Project overview |
+| `/customers` | Customer listing, with create and edit links |
+| `/customers/new` | Create a customer |
+| `/customers/{id}/edit` | Edit a customer |
+| `/users` | User listing with prepared avatars or a placeholder |
+| `/users/new` | Create a user |
+| `/users/{id}/edit` | Edit a user and optionally upload an avatar |
+
+Customer forms require a full name and valid email. User forms require a full name and unique username. The edit form accepts an optional JPG or PNG avatar up to 2 MB. The server validates the file, crops it to a 256 × 256 pixel image, stores the image in `public/uploads/avatars`, and saves only the generated filename in `users.avatar`. Generated avatars are ignored by Git; the placeholder SVG is tracked. Invalid forms show field errors and keep entered text.
+
+The forms include CSRF tokens, and the application enables the CodeIgniter CSRF filter for POST requests. Keep the uploads directory writable on your host and serve the app through the `public` directory.
+
+## Verification
+
+Run `vendor/bin/phpunit` with the PHP SQLite3 extension enabled; the test suite uses an in-memory database. To check the application manually, open both new forms, submit empty and invalid values, create records, edit them, test a duplicate username, and upload a valid and invalid avatar. Verify that the user listing shows a 256 × 256 prepared image or the placeholder.
+
+## Repository
+
+[GitHub repository](https://github.com/berrycole/LokalCart)

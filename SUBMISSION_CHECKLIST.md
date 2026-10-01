@@ -1,36 +1,22 @@
-# IT0049 Technical Formative Assessment 2 Submission Checklist
+# IT0049 Technical Formative Assessment 3 Submission Checklist
 
-## Student details
+## Database and setup
 
-- Student name: Nicole Fernandez
-- Section: TW32
-- Professor: Von Erick Magbitang
-
-## Database verification
-
-- [ ] MySQL is running locally.
-- [ ] database/lokalcart_pos_tfa2.sql was imported successfully.
-- [ ] The lokalcart_pos_tfa2 database contains customers and users.
-- [ ] Each table has at least five records.
-- [ ] .env has the correct local MySQL username, password, and port.
+- [ ] Import `database/lokalcart_pos_tfa3.sql` for a fresh installation, or apply `database/upgrade_tfa2_to_tfa3.sql` to an existing TFA2 database.
+- [ ] Configure `.env` for the selected database and make `public/uploads/avatars` writable by the web server.
+- [ ] Confirm PHP has `intl`, `mysqli`, `fileinfo`, and `gd` enabled.
 
 ## Application verification
 
-- [ ] / and /about open without errors.
-- [ ] /customers displays full name, email, and phone from the database.
-- [ ] /users displays username, full name, and created at from the database.
-- [ ] Customer and user records are retrieved through Models, not static arrays.
-- [ ] Navigation works on all four pages.
-- [ ] php vendor/bin/phpunit passes.
+- [ ] Create a customer at `/customers/new`; confirm blank name and invalid email are rejected with retained entries.
+- [ ] Create a user at `/users/new`; confirm blank fields and duplicate usernames are rejected.
+- [ ] Edit an existing customer and user; confirm the forms start with stored values.
+- [ ] On a user edit page, upload a JPG or PNG under 2 MB and confirm the user listing shows a prepared avatar.
+- [ ] Confirm an invalid file is rejected, a user without an avatar shows the placeholder, and existing TFA2 pages still work.
+- [ ] Run `vendor/bin/phpunit` with the SQLite3 extension enabled for the local test suite.
 
-## Repository verification
+## Submission
 
-- [ ] database/lokalcart_pos_tfa2.sql is committed.
-- [ ] Both Models, controllers, views, .env.example, and README.md are present.
-- [ ] .env, vendor, and writable logs are not committed.
-- [ ] The latest Git commit matches the deployed code.
-
-## Links to submit
-
-- GitHub repository: ________________________________
-- Hosted application: _______________________________
+- [ ] Push the project files and database export to [the LokalCart repository](https://github.com/berrycole/LokalCart).
+- [ ] Deploy the same commit to a PHP/MySQL host and verify the hosted forms and upload folder.
+- [ ] Submit both the repository URL and the working hosted application URL required by TFA3.

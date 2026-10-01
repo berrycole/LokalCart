@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?= esc($description) ?>">
-    <title><?= esc($title) ?> | Tasks for Today</title>
+    <title><?= esc($title) ?> | LokalCart</title>
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
 </head>
 <body>
@@ -20,6 +20,8 @@
                 <a href="<?= site_url('about') ?>" <?= $activePage === 'about' ? 'aria-current="page"' : '' ?>>About</a>
                 <a href="<?= site_url('tasks') ?>" <?= $activePage === 'tasks' ? 'aria-current="page"' : '' ?>>Task List</a>
                 <a href="<?= site_url('profile') ?>" <?= $activePage === 'profile' ? 'aria-current="page"' : '' ?>>Profile</a>
+                <a href="<?= site_url('customers') ?>" <?= $activePage === 'customers' ? 'aria-current="page"' : '' ?>>Customers</a>
+                <a href="<?= site_url('users') ?>" <?= $activePage === 'users' ? 'aria-current="page"' : '' ?>>Users</a>
             </nav>
         </div>
     </header>
@@ -27,7 +29,7 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <div><strong>Tasks for Today</strong><p>A CodeIgniter 4 MVC application for IT0049.</p></div>
-            <p>Task and profile records are retrieved from the LokalCart MySQL database.</p>
+            <p>Tasks, customer accounts, and user accounts are stored in the LokalCart MySQL database.</p>
         </div>
     </footer>
 </body>

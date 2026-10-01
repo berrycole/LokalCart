@@ -85,6 +85,8 @@ php_errors.log
 # Composer
 #-------------------------
 vendor/
+/public/uploads/avatars/*
+!/public/uploads/avatars/index.html
 
 #-------------------------
 # IDE / Development Files
