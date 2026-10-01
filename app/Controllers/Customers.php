@@ -79,7 +79,7 @@ class Customers extends BaseController
         return [
             'full_name' => 'required|max_length[100]',
             'email' => 'required|valid_email|max_length[100]',
-            'phone' => 'permit_empty|max_length[30]',
+            'phone' => 'permit_empty|max_length[20]',
         ];
     }
 

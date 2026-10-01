@@ -45,10 +45,10 @@ final class PagesTest extends CIUnitTestCase
     public static function pageProvider(): array
     {
         return [
-            'today dashboard' => ['/', 'Tasks for today'],
+            'LokalCart home' => ['/', 'Your store team and customers in one dependable workspace'],
             'task list' => ['/tasks', 'Task List'],
             'profile page' => ['/profile', 'Profile'],
-            'about page' => ['/about', 'Built by Berry Cole'],
+            'about page' => ['/about', 'A focused foundation for a future point-of-sale system'],
         ];
     }
 

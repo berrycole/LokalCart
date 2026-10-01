@@ -1,5 +1,40 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
-<section class="hero"><div class="container hero-grid"><div class="hero-copy"><p class="eyebrow">Daily planning</p><h1>Tasks for today, ready to act on.</h1><p class="hero-text">A simple shared view for organizing the work that matters today, powered by CodeIgniter 4 and MySQL.</p><div class="button-row"><a class="button button-primary" href="<?= site_url('tasks') ?>">View all tasks</a><a class="button button-secondary" href="<?= site_url('profile') ?>">View profile</a></div></div><div class="hero-panel"><p class="panel-label">Today</p><div class="status-line"><span class="status-dot" aria-hidden="true"></span><strong><?= count($tasks) ?> task<?= count($tasks) === 1 ? '' : 's' ?> scheduled</strong></div><dl class="metric-grid"><div><dt><?= count($tasks) ?></dt><dd>Due today</dd></div><div><dt>1</dt><dd>Demo user</dd></div><div><dt>MySQL</dt><dd>Data source</dd></div><div><dt>MVC</dt><dd>App structure</dd></div></dl></div></div></section>
-<section class="section table-section"><div class="container"><div class="table-card"><div class="table-card-header"><div><p class="eyebrow">Welcome page</p><h2>Today's task queue</h2><p>Only tasks dated <?= esc(date('F j, Y', strtotime($today))) ?> are shown here.</p></div><span class="data-source">TaskModel</span></div><div class="table-scroll"><table><caption class="visually-hidden">Tasks scheduled for today</caption><thead><tr><th scope="col">Task</th><th scope="col">Status</th><th scope="col">Created</th></tr></thead><tbody><?php if ($tasks === []): ?><tr><td colspan="3">No tasks are scheduled for today.</td></tr><?php else: ?><?php foreach ($tasks as $task): ?><tr><td data-label="Task"><strong><?= esc($task['title']) ?></strong></td><td data-label="Status"><?= esc(ucfirst($task['status'])) ?></td><td data-label="Created"><?= esc(date('M j, Y g:i A', strtotime($task['created_at']))) ?></td></tr><?php endforeach ?><?php endif ?></tbody></table></div></div></div></section>
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <p class="eyebrow">Retail operations made clear</p>
+            <h1>Your store team and customers in one dependable workspace.</h1>
+            <p class="hero-text">LokalCart is the first working foundation of a point-of-sale system, built with CodeIgniter 4 and a clean MVC structure.</p>
+            <div class="button-row">
+                <a class="button button-primary" href="<?= site_url('customers') ?>">View customers</a>
+                <a class="button button-secondary" href="<?= site_url('users') ?>">View staff accounts</a>
+            </div>
+        </div>
+        <div class="hero-panel" aria-label="Application summary">
+            <p class="panel-label">Foundation status</p>
+            <div class="status-line"><span class="status-dot" aria-hidden="true"></span><strong>All routes are ready</strong></div>
+            <dl class="metric-grid">
+                <div><dt>4</dt><dd>Working pages</dd></div>
+                <div><dt>2</dt><dd>Account types</dd></div>
+                <div><dt>MVC</dt><dd>Organized structure</dd></div>
+                <div><dt>2</dt><dd>Account tables</dd></div>
+            </dl>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="section-heading">
+            <p class="eyebrow">Explore the application</p>
+            <h2>From a clear MVC foundation to a real database.</h2>
+            <p>Each page has a focused purpose while customer and user records now persist in MySQL.</p>
+        </div>
+        <div class="card-grid">
+            <article class="feature-card"><span class="card-number">01</span><h3>About the project</h3><p>See how routes, controllers, models, and views work together in CodeIgniter.</p><a class="text-link" href="<?= site_url('about') ?>">Read the overview <span aria-hidden="true">&rarr;</span></a></article>
+            <article class="feature-card"><span class="card-number">02</span><h3>Customer accounts</h3><p>Review customer names, email addresses, and phone numbers retrieved from MySQL.</p><a class="text-link" href="<?= site_url('customers') ?>">Open customers <span aria-hidden="true">&rarr;</span></a></article>
+            <article class="feature-card"><span class="card-number">03</span><h3>User accounts</h3><p>Review usernames and full names retrieved through a separate database model.</p><a class="text-link" href="<?= site_url('users') ?>">Open user accounts <span aria-hidden="true">&rarr;</span></a></article>
+        </div>
+    </div>
+</section>
 <?= $this->endSection() ?>

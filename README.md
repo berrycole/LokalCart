@@ -1,6 +1,6 @@
 # LokalCart POS
 
-A CodeIgniter 4 application for IT0049 Technical Formative Assessment 3. It extends the TFA2 task dashboard with customer and user account forms, server-side validation, and prepared user avatars.
+A CodeIgniter 4 point-of-sale foundation for IT0049 Technical Formative Assessment 3. It keeps the original LokalCart Home, About, customer, and user pages while adding account forms, server-side validation, and prepared user avatars.
 
 ## Requirements
 
@@ -16,22 +16,22 @@ A CodeIgniter 4 application for IT0049 Technical Formative Assessment 3. It exte
 3. Copy `.env.example` to `.env`. Set your database username, password, host, and port as needed. The default database name is `lokalcart_pos_tfa3`.
 4. Run `php spark serve` and visit `http://localhost:8080/`.
 
-For an existing TFA2 installation, run `database/upgrade_tfa2_to_tfa3.sql` once against `lokalcart_pos_tfa2` instead of importing the fresh export. Keep `.env` pointed at `lokalcart_pos_tfa2`. That script adds the customers table and avatar column without deleting tasks or users. Do not rerun the `ALTER TABLE` after it succeeds.
+For an existing TFA2 installation, run `database/upgrade_tfa2_to_tfa3.sql` against `lokalcart_pos_tfa2` instead of importing the fresh export. Keep `.env` pointed at `lokalcart_pos_tfa2`. That script preserves tasks and users, adds a customers table if needed, and adds missing email and avatar columns to users. It can be rerun safely.
 
 ## Pages and behavior
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Today's task dashboard |
-| `/tasks` | Full task list |
-| `/profile` | Original TFA2 demo profile |
-| `/about` | Project overview |
+| `/` | Original LokalCart Home page |
+| `/about` | Original LokalCart project overview |
 | `/customers` | Customer listing, with create and edit links |
 | `/customers/new` | Create a customer |
 | `/customers/{id}/edit` | Edit a customer |
 | `/users` | User listing with prepared avatars or a placeholder |
 | `/users/new` | Create a user |
 | `/users/{id}/edit` | Edit a user and optionally upload an avatar |
+
+The pre-existing `/tasks` and `/profile` routes remain available, but the main navigation follows the original LokalCart point-of-sale pages.
 
 Customer forms require a full name and valid email. User forms require a full name and unique username. The edit form accepts an optional JPG or PNG avatar up to 2 MB. The server validates the file, crops it to a 256 × 256 pixel image, stores the image in `public/uploads/avatars`, and saves only the generated filename in `users.avatar`. Generated avatars are ignored by Git; the placeholder SVG is tracked. Invalid forms show field errors and keep entered text.
 

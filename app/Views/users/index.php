@@ -2,15 +2,15 @@
 <?= $this->section('content') ?>
 <section class="page-hero compact">
     <div class="container page-heading-row">
-        <div><p class="eyebrow">Team access</p><h1>User Accounts</h1><p>Manage <?= count($users) ?> user accounts.</p></div>
-        <a class="button button-primary" href="<?= site_url('users/new') ?>">New user</a>
+        <div><p class="eyebrow">Team access</p><h1>User Accounts</h1><p>Account details for <?= count($users) ?> users retrieved from the LokalCart database.</p></div>
+        <div class="page-hero-actions"><div class="count-badge" aria-label="<?= count($users) ?> user records"><strong><?= count($users) ?></strong><span>Records</span></div><a class="button button-primary" href="<?= site_url('users/new') ?>">New user</a></div>
     </div>
 </section>
 <section class="section table-section">
     <div class="container">
         <?php if (session()->getFlashdata('success')): ?><p class="notice success" role="status"><?= esc(session()->getFlashdata('success')) ?></p><?php endif ?>
         <div class="table-card">
-            <div class="table-card-header"><div><h2>User directory</h2><p>Accounts and prepared profile pictures</p></div><span class="data-source">MySQL database</span></div>
+            <div class="table-card-header"><div><h2>User directory</h2><p>Records retrieved through UserModel</p></div><span class="data-source">MySQL database</span></div>
             <?php if ($users === []): ?>
                 <p class="empty-state">No users yet. <a href="<?= site_url('users/new') ?>">Add the first user</a>.</p>
             <?php else: ?>

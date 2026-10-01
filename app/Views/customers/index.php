@@ -2,15 +2,15 @@
 <?= $this->section('content') ?>
 <section class="page-hero compact">
     <div class="container page-heading-row">
-        <div><p class="eyebrow">Directory</p><h1>Customer Accounts</h1><p>Manage <?= count($customers) ?> customer records.</p></div>
-        <a class="button button-primary" href="<?= site_url('customers/new') ?>">New customer</a>
+        <div><p class="eyebrow">Directory</p><h1>Customer Accounts</h1><p>Contact details for <?= count($customers) ?> customers retrieved from the LokalCart database.</p></div>
+        <div class="page-hero-actions"><div class="count-badge" aria-label="<?= count($customers) ?> customer records"><strong><?= count($customers) ?></strong><span>Records</span></div><a class="button button-primary" href="<?= site_url('customers/new') ?>">New customer</a></div>
     </div>
 </section>
 <section class="section table-section">
     <div class="container">
         <?php if (session()->getFlashdata('success')): ?><p class="notice success" role="status"><?= esc(session()->getFlashdata('success')) ?></p><?php endif ?>
         <div class="table-card">
-            <div class="table-card-header"><div><h2>Customer directory</h2><p>Contact details from the POS database</p></div><span class="data-source">MySQL database</span></div>
+            <div class="table-card-header"><div><h2>Customer directory</h2><p>Records retrieved through CustomerModel</p></div><span class="data-source">MySQL database</span></div>
             <?php if ($customers === []): ?>
                 <p class="empty-state">No customers yet. <a href="<?= site_url('customers/new') ?>">Add the first customer</a>.</p>
             <?php else: ?>

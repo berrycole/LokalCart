@@ -18,7 +18,7 @@ CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    phone VARCHAR(30) NOT NULL DEFAULT '',
+    phone VARCHAR(20) NOT NULL DEFAULT '',
     created_at DATETIME NOT NULL
 );
 
@@ -42,8 +42,17 @@ INSERT INTO tasks (title, status, task_date, created_at) VALUES
 ('Review weekly targets', 'pending', DATE_SUB(CURDATE(), INTERVAL 1 DAY), NOW());
 
 INSERT INTO customers (full_name, email, phone, created_at) VALUES
-('Alex Rivera', 'alex.rivera@example.com', '09171234567', NOW()),
-('Sam Cruz', 'sam.cruz@example.com', '', NOW());
+('Mikaela Santos', 'mikaela.santos@example.com', '+63 917 420 1842', '2026-09-01 09:15:00'),
+('Paolo Reyes', 'paolo.reyes@example.com', '+63 918 735 2096', '2026-09-02 10:30:00'),
+('Alyssa Lim', 'alyssa.lim@example.com', '+63 905 641 3378', '2026-09-03 11:45:00'),
+('Gabriel Cruz', 'gabriel.cruz@example.com', '+63 927 116 8504', '2026-09-04 13:00:00'),
+('Nicole Mendoza', 'nicole.mendoza@example.com', '+63 916 802 4791', '2026-09-05 14:15:00'),
+('Andre Villanueva', 'andre.villanueva@example.com', '+63 998 253 6610', '2026-09-06 15:30:00');
 
 INSERT INTO users (username, full_name, email, avatar, created_at) VALUES
-('berry.cole', 'Berry Cole', 'berry.cole@example.com', NULL, NOW());
+('admin.ramos', 'Elena Ramos', 'elena.ramos@example.com', NULL, '2026-09-01 08:00:00'),
+('manager.dizon', 'Carlo Dizon', 'carlo.dizon@example.com', NULL, '2026-09-02 08:30:00'),
+('cashier.ong', 'Sofia Ong', 'sofia.ong@example.com', NULL, '2026-09-03 09:00:00'),
+('cashier.flores', 'Miguel Flores', 'miguel.flores@example.com', NULL, '2026-09-04 09:30:00'),
+('stock.garcia', 'Bea Garcia', 'bea.garcia@example.com', NULL, '2026-09-05 10:00:00'),
+('support.tan', 'Luis Tan', 'luis.tan@example.com', NULL, '2026-09-06 10:30:00');
