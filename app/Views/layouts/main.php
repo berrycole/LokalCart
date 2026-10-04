@@ -20,6 +20,15 @@
                 <a href="<?= site_url('about') ?>" <?= $activePage === 'about' ? 'aria-current="page"' : '' ?>>About</a>
                 <a href="<?= site_url('customers') ?>" <?= $activePage === 'customers' ? 'aria-current="page"' : '' ?>>Customers</a>
                 <a href="<?= site_url('users') ?>" <?= $activePage === 'users' ? 'aria-current="page"' : '' ?>>Users</a>
+                <?php if (session('isLoggedIn') === true): ?>
+                    <span class="signed-in-user">Signed in as <?= esc(session('username')) ?></span>
+                    <form class="logout-form" method="post" action="<?= site_url('logout') ?>">
+                        <?= csrf_field() ?>
+                        <button class="nav-button" type="submit">Sign out</button>
+                    </form>
+                <?php else: ?>
+                    <a href="<?= site_url('login') ?>" <?= $activePage === 'login' ? 'aria-current="page"' : '' ?>>Sign in</a>
+                <?php endif ?>
             </nav>
         </div>
     </header>

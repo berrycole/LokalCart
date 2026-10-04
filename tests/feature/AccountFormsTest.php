@@ -11,10 +11,11 @@ final class AccountFormsTest extends CIUnitTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->withSession(['isLoggedIn' => true, 'user_id' => 1, 'username' => 'staff']);
 
         $db = db_connect();
         $db->query('CREATE TABLE IF NOT EXISTS db_customers (id INTEGER PRIMARY KEY AUTOINCREMENT, full_name TEXT NOT NULL, email TEXT NOT NULL, phone TEXT NOT NULL, created_at TEXT NOT NULL)');
-        $db->query('CREATE TABLE IF NOT EXISTS db_users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL UNIQUE, full_name TEXT NOT NULL, email TEXT NOT NULL, avatar TEXT NULL, created_at TEXT NOT NULL)');
+        $db->query('CREATE TABLE IF NOT EXISTS db_users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL UNIQUE, full_name TEXT NOT NULL, email TEXT NOT NULL, avatar TEXT NULL, password TEXT NOT NULL DEFAULT \'\', created_at TEXT NOT NULL)');
         $db->query('DELETE FROM db_customers');
         $db->query('DELETE FROM db_users');
     }
@@ -64,7 +65,7 @@ final class AccountFormsTest extends CIUnitTestCase
 
         $this->post('/users', [
             'csrf_test_name' => csrf_hash(),
-            'username' => 'alex',
+            'username' => 'alex', 'password' => 'AccountPassword123!',
             'full_name' => 'Alex Rivera',
             'email' => 'alex@example.com',
         ])->assertRedirect();
@@ -72,7 +73,7 @@ final class AccountFormsTest extends CIUnitTestCase
         $this->get('/users/' . $userId . '/edit')->assertSee('Profile picture');
         $this->post('/users/' . $userId, [
             'csrf_test_name' => csrf_hash(),
-            'username' => 'alex',
+            'username' => 'alex', 'password' => 'AccountPassword123!',
             'full_name' => 'Alex R.',
             'email' => 'alex@example.com',
         ])->assertRedirect();
@@ -82,12 +83,12 @@ final class AccountFormsTest extends CIUnitTestCase
     public function testDuplicateUsernameIsRejected(): void
     {
         db_connect()->table('users')->insert([
-            'username' => 'alex', 'full_name' => 'Alex', 'email' => '', 'created_at' => date('Y-m-d H:i:s'),
+            'username' => 'alex', 'password' => 'AccountPassword123!', 'full_name' => 'Alex', 'email' => '', 'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         $result = $this->post('/users', [
             'csrf_test_name' => csrf_hash(),
-            'username' => 'alex',
+            'username' => 'alex', 'password' => 'AccountPassword123!',
             'full_name' => 'Another Alex',
             'email' => '',
         ]);

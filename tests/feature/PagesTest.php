@@ -16,7 +16,7 @@ final class PagesTest extends CIUnitTestCase
 
         $db = db_connect();
         $db->query('CREATE TABLE IF NOT EXISTS db_tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, status TEXT NOT NULL, task_date TEXT NOT NULL, created_at TEXT NOT NULL)');
-        $db->query('CREATE TABLE IF NOT EXISTS db_users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL UNIQUE, full_name TEXT NOT NULL, email TEXT NOT NULL, avatar TEXT NULL, created_at TEXT NOT NULL)');
+        $db->query('CREATE TABLE IF NOT EXISTS db_users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL UNIQUE, full_name TEXT NOT NULL, email TEXT NOT NULL, avatar TEXT NULL, password TEXT NOT NULL DEFAULT \'\', created_at TEXT NOT NULL)');
         $db->query('DELETE FROM db_tasks');
         $db->query('DELETE FROM db_users');
         $db->table('tasks')->insert([

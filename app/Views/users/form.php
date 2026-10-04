@@ -5,6 +5,12 @@
     <?php if ($errors !== []): ?><div class="notice error" role="alert"><strong>Please correct the highlighted fields.</strong></div><?php endif ?>
     <form method="post" action="<?= $id === null ? site_url('users') : site_url('users/' . $id) ?>" <?= $id !== null ? 'enctype="multipart/form-data"' : '' ?>>
         <?= csrf_field() ?>
+        <div class="form-field">
+            <label for="password"><?= $id === null ? 'Password' : 'New password' ?></label>
+            <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" <?= $id === null ? 'required' : '' ?> aria-describedby="password-help<?= isset($errors['password']) ? ' password-error' : '' ?>" <?= isset($errors['password']) ? 'aria-invalid="true"' : '' ?>>
+            <p class="field-help" id="password-help">Use 8–72 characters.<?= $id !== null ? ' Leave blank to keep the current password.' : '' ?></p>
+            <?php if (isset($errors['password'])): ?><p class="field-error" id="password-error"><?= esc($errors['password']) ?></p><?php endif ?>
+        </div>
         <div class="form-field"><label for="username">Username <span aria-hidden="true">*</span></label><input id="username" name="username" type="text" maxlength="50" required value="<?= esc($values['username'], 'attr') ?>" <?= isset($errors['username']) ? 'aria-invalid="true" aria-describedby="username-error"' : '' ?>><?php if (isset($errors['username'])): ?><p class="field-error" id="username-error"><?= esc($errors['username']) ?></p><?php endif ?></div>
         <div class="form-field"><label for="full_name">Full name <span aria-hidden="true">*</span></label><input id="full_name" name="full_name" type="text" maxlength="100" required value="<?= esc($values['full_name'], 'attr') ?>" <?= isset($errors['full_name']) ? 'aria-invalid="true" aria-describedby="full_name-error"' : '' ?>><?php if (isset($errors['full_name'])): ?><p class="field-error" id="full_name-error"><?= esc($errors['full_name']) ?></p><?php endif ?></div>
         <div class="form-field"><label for="email">Email address</label><input id="email" name="email" type="email" maxlength="100" value="<?= esc($values['email'], 'attr') ?>" <?= isset($errors['email']) ? 'aria-invalid="true" aria-describedby="email-error"' : '' ?>><?php if (isset($errors['email'])): ?><p class="field-error" id="email-error"><?= esc($errors['email']) ?></p><?php endif ?></div>

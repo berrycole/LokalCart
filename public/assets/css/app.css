@@ -11,6 +11,17 @@
     --radius: 20px;
 }
 
+.login-container { max-width: 560px; }
+.login-heading { font-size: 1.6rem; margin-bottom: 0.5rem; }
+.login-intro { margin-bottom: 1.75rem; }
+.login-submit { width: 100%; }
+.signed-in-user { max-width: 180px; overflow-wrap: anywhere; padding: 0.6rem; color: var(--muted); font-size: 0.78rem; }
+.logout-form { margin: 0; flex-shrink: 0; }
+.nav-button { padding: 0.6rem 0.85rem; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--teal-dark); font: inherit; font-size: 0.92rem; font-weight: 650; cursor: pointer; }
+.nav-button:hover { background: var(--mint); }
+.nav-button:focus-visible, .button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+@media (max-width: 800px) { .primary-nav { flex-wrap: wrap; } .signed-in-user { max-width: none; } }
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {

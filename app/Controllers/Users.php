@@ -31,6 +31,7 @@ class Users extends BaseController
             return $this->form(null, $values, $this->validator->getErrors());
         }
 
+        $values['password'] = password_hash($values['password'], PASSWORD_DEFAULT);
         (new UserModel())->insert($values + ['created_at' => date('Y-m-d H:i:s')]);
 
         return redirect()->to(site_url('users'))->with('success', 'User created.');
@@ -92,6 +93,12 @@ class Users extends BaseController
 
         $model = new UserModel();
 
+        if ($values['password'] === '') {
+            unset($values['password']);
+        } else {
+            $values['password'] = password_hash($values['password'], PASSWORD_DEFAULT);
+        }
+
         if (! $model->update($id, $values)) {
             if ($newAvatar !== null) {
                 unlink($directory . DIRECTORY_SEPARATOR . $newAvatar);
@@ -130,6 +137,7 @@ class Users extends BaseController
             'username' => trim((string) $this->request->getPost('username')),
             'full_name' => trim((string) $this->request->getPost('full_name')),
             'email' => trim((string) $this->request->getPost('email')),
+            'password' => (string) $this->request->getPost('password'),
         ];
     }
 
@@ -141,6 +149,7 @@ class Users extends BaseController
             'username' => 'required|max_length[50]|' . $unique,
             'full_name' => 'required|max_length[100]',
             'email' => 'permit_empty|valid_email|max_length[100]',
+            'password' => ($id === null ? 'required' : 'permit_empty') . '|min_length[8]|max_length[72]|passwordBytes',
         ];
     }
 

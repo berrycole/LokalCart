@@ -21,8 +21,8 @@
     <div class="container">
         <div class="section-heading"><p class="eyebrow">Current scope</p><h2>Ready for database-backed account management.</h2></div>
         <div class="scope-grid">
-            <article><h3>Included now</h3><ul class="check-list"><li>Customer and user account pages</li><li>Separate controllers and database models</li><li>MySQL customers and users tables</li><li>Validated create and edit forms</li><li>Prepared user avatars</li><li>Reusable layout and navigation</li><li>Responsive, accessible tables</li></ul></article>
-            <article><h3>Reserved for later</h3><ul class="plain-list"><li>Authentication and permissions</li><li>Product and inventory records</li><li>Sales transactions and receipts</li><li>Delete actions</li><li>Reports and analytics</li></ul></article>
+            <article><h3>Included now</h3><ul class="check-list"><li>Customer and user account pages</li><li>Separate controllers and database models</li><li>MySQL customers and users tables</li><li>Validated create and edit forms</li><li>Prepared user avatars</li><li>Staff login and protected account pages</li><li>Reusable layout and navigation</li><li>Responsive, accessible tables</li></ul></article>
+            <article><h3>Reserved for later</h3><ul class="plain-list"><li>Role-based permissions</li><li>Product and inventory records</li><li>Sales transactions and receipts</li><li>Delete actions</li><li>Reports and analytics</li></ul></article>
         </div>
     </div>
 </section>
